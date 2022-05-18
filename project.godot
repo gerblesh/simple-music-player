@@ -34,10 +34,22 @@ config/icon="res://icon.png"
 
 GDscriptAudioImport="*res://GDScriptAudioImport/GDScriptAudioImport.gd"
 
+[display]
+
+window/size/width=700
+window/size/height=500
+window/per_pixel_transparency/allowed=true
+window/per_pixel_transparency/enabled=true
+
+[global]
+
+window=false
+
 [physics]
 
 common/enable_pause_aware_picking=true
 
 [rendering]
 
+environment/default_clear_color=Color( 0, 0, 0, 0.0352941 )
 environment/default_environment="res://default_env.tres"
