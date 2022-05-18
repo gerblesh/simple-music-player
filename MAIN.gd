@@ -32,9 +32,8 @@ func refresh_dir():
 				if name == "":
 					return
 				music.append(name)  # adding the file name to the array
-		print("yea baybeeee")
 	else:
-		print("mega sussy wussy")
+		print("failed to open file")
 
 
 
