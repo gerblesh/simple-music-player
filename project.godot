@@ -13,15 +13,21 @@ _global_script_classes=[ {
 "class": "AudioLoader",
 "language": "GDScript",
 "path": "res://GDScriptAudioImport/GDScriptAudioImport.gd"
+}, {
+"base": "Control",
+"class": "MAIN",
+"language": "GDScript",
+"path": "res://MAIN/MAIN.gd"
 } ]
 _global_script_class_icons={
-"AudioLoader": ""
+"AudioLoader": "",
+"MAIN": ""
 }
 
 [application]
 
 config/name="music_player"
-run/main_scene="res://MAIN.tscn"
+run/main_scene="res://MAIN/MAIN.tscn"
 config/icon="res://icon.png"
 
 [autoload]

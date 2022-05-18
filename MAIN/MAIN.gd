@@ -1,5 +1,7 @@
 extends Control
-
+class_name MAIN
+# signals
+signal refresh_dir
 # audiostreamplayer
 var audio_stream_player = AudioStreamPlayer.new()
 # music directory and song variables
@@ -8,7 +10,7 @@ var current_song = 0
 var music_dir
 var music = []
 func _ready():
-	
+	yield(get_tree(), "idle_frame")
 	add_child(audio_stream_player)
 	audio_stream_player.connect("finished",self,"next_song")
 	audio_stream_player.pause_mode = Node.PAUSE_MODE_STOP
@@ -30,23 +32,8 @@ func refresh_dir():
 			name = music_dir.get_next()
 			if !music_dir.current_is_dir():
 				if name == "":
+					emit_signal("refresh_dir")
 					return
 				music.append(name)  # adding the file name to the array
 	else:
 		print("failed to open file")
-
-
-
-
-# extremely basic button controls implementation TODO: refactor later lol
-func _on_play_toggled(button_pressed):
-	get_tree().paused = button_pressed
-
-func _process(_delta):
-	$controls/time.max_value = audio_stream_player.stream.get_length()
-	$controls/time.value = audio_stream_player.get_playback_position()
-
-func _on_time_value_changed(value):
-	if abs(value - audio_stream_player.get_playback_position()) < 1:
-		return
-	audio_stream_player.seek(value)
