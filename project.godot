@@ -28,11 +28,14 @@ _global_script_class_icons={
 
 config/name="music_player"
 run/main_scene="res://MAIN/MAIN.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="music player data"
 config/icon="res://icon.png"
 
 [autoload]
 
 GdScriptAudioImport="*res://AudioImporter/GDScriptAudioImport.gd"
+ConfigSave="*res://SAVE/config save.gd"
 
 [display]
 
