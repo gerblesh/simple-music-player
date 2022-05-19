@@ -49,11 +49,11 @@ expand = true
 stretch_mode = 3
 
 [node name="controls" type="VBoxContainer" parent="."]
-anchor_top = 0.832
+anchor_top = 0.737
 anchor_right = 1.0
-anchor_bottom = 1.025
-margin_top = -17.664
-margin_bottom = -17.55
+anchor_bottom = 1.0
+margin_top = 0.0259705
+margin_bottom = -4.0
 
 [node name="time" type="HSlider" parent="controls"]
 margin_right = 850.0
@@ -105,14 +105,14 @@ align = 1
 [node name="songs" type="ScrollContainer" parent="."]
 anchor_top = 0.1
 anchor_right = 1.0
-anchor_bottom = 0.787
+anchor_bottom = 0.719
 margin_top = -0.200001
-margin_bottom = -0.0740356
+margin_bottom = 0.0619812
 focus_neighbour_bottom = NodePath("../controls/time")
 
 [node name="song container" type="VBoxContainer" parent="songs"]
 margin_right = 850.0
-margin_bottom = 345.0
+margin_bottom = 311.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
