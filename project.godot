@@ -38,8 +38,6 @@ GDscriptAudioImport="*res://GDScriptAudioImport/GDScriptAudioImport.gd"
 
 window/size/width=700
 window/size/height=500
-window/per_pixel_transparency/allowed=true
-window/per_pixel_transparency/enabled=true
 
 [global]
 

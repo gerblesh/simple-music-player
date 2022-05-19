@@ -19,7 +19,6 @@ func _ready():
 	audio_stream_player.pause_mode = Node.PAUSE_MODE_STOP
 	refresh_dir()
 	next_song(0)
-
 func next_song(next = 1):
 	current_song = wrapi(current_song + next,0,music.size()) # constrains the index from getting outside of the array
 	var file_path = music[current_song]
