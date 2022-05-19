@@ -22,6 +22,8 @@ func _ready():
 func play_toggled(button_pressed):
 	get_tree().paused = button_pressed
 func _process(_delta):
+	if current_song == null:
+		return
 	song_length = audio_stream_player.stream.get_length()
 	song_position = audio_stream_player.get_playback_position()
 	scrubber.max_value = song_length

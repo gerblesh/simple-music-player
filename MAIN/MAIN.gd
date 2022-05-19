@@ -6,19 +6,19 @@ signal refresh_dir
 var audio_stream_player = AudioStreamPlayer.new()
 # music directory and song variables
 onready var music_dir_path = OS.get_system_dir(OS.SYSTEM_DIR_MUSIC)
-var current_song = 0
+var current_song = null
 var song_length
 var song_position
 var music_dir
 var music = []
 var song_names = []
 func _ready():
+	get_tree().paused = true
 	yield(get_tree(), "idle_frame") # waiting for the UI ready function to connect it's signals
 	add_child(audio_stream_player)
 	audio_stream_player.connect("finished",self,"next_song")
 	audio_stream_player.pause_mode = Node.PAUSE_MODE_STOP
 	refresh_dir()
-	next_song(0)
 func next_song(next = 1):
 	current_song = wrapi(current_song + next,0,music.size()) # constrains the index from getting outside of the array
 	var file_path = music[current_song]
