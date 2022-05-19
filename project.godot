@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "AudioLoader",
 "language": "GDScript",
-"path": "res://GDScriptAudioImport/GDScriptAudioImport.gd"
+"path": "res://AudioImporter/GDScriptAudioImport.gd"
 }, {
 "base": "Control",
 "class": "MAIN",
@@ -32,7 +32,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GDscriptAudioImport="*res://GDScriptAudioImport/GDScriptAudioImport.gd"
+GdScriptAudioImport="*res://AudioImporter/GDScriptAudioImport.gd"
 
 [display]
 
