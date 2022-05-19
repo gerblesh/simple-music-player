@@ -11,14 +11,21 @@ onready var backward = $controls/buttons/backward
 onready var song_container = $"songs/song container"
 onready var song_label = $controls/name
 onready var time_label = $"controls/time label"
-
+onready var directory_label = $directory/text
+onready var directory_change = $directory/change
+onready var file_panel = $popup
 func _ready():
 	scrubber.connect("value_changed",self,"scrub")
 	pause.connect("toggled",self,"play_toggled")
 	connect("refresh_dir",self,"refresh_songs")
-	connect("refresh_dir",self,"refresh_songs")
 	forward.connect("pressed",self,"song_forward")
 	backward.connect("pressed",self,"song_backward")
+	directory_change.connect("pressed",self,"change_dir_pressed")
+	
+func change_dir_pressed():
+	file_panel.current_dir = music_dir_path
+	file_panel.popup_centered(Vector2(500,350))
+	file_panel.connect("dir_selected",self,"dir_selected")
 func play_toggled(button_pressed):
 	get_tree().paused = button_pressed
 func _process(_delta):
@@ -54,6 +61,10 @@ func refresh_songs():
 		button_inst.text = I
 		button_inst.connect("button_pressed",self,"song_pressed")
 		song_container.add_child(button_inst)
+	directory_label.text = "Current Folder: "+music_dir_path
 func song_pressed(button):
 	current_song = button.get_position_in_parent()
 	next_song(0)
+func dir_selected(dir):
+	music_dir_path = dir
+	refresh_dir()

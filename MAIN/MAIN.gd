@@ -11,15 +11,21 @@ var song_length
 var song_position
 var music_dir
 var music = []
+var song_queue = []
 var song_names = []
 func _ready():
-	get_tree().paused = true
 	yield(get_tree(), "idle_frame") # waiting for the UI ready function to connect it's signals
 	add_child(audio_stream_player)
 	audio_stream_player.connect("finished",self,"next_song")
 	audio_stream_player.pause_mode = Node.PAUSE_MODE_STOP
 	refresh_dir()
 func next_song(next = 1):
+	if current_song == null:
+		current_song = 0
+	get_tree().paused = false
+	# temp UI script 
+	# TODO: move later
+	$controls/buttons/play.pressed = false
 	current_song = wrapi(current_song + next,0,music.size()) # constrains the index from getting outside of the array
 	var file_path = music[current_song]
 	audio_stream_player.stream = AudioLoader.new().loadfile(file_path)

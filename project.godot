@@ -36,7 +36,7 @@ GDscriptAudioImport="*res://GDScriptAudioImport/GDScriptAudioImport.gd"
 
 [display]
 
-window/size/width=700
+window/size/width=850
 window/size/height=500
 
 [global]

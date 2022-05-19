@@ -1,9 +1,36 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://MAIN/UI Controls.gd" type="Script" id=1]
 [ext_resource path="res://MAIN/theming/defualt_theme.tres" type="Theme" id=2]
-[ext_resource path="res://FileDialog.gd" type="Script" id=3]
 [ext_resource path="res://MAIN/theming/5120x2880.jpg" type="Texture" id=4]
+
+[sub_resource type="Shader" id=15]
+code = "shader_type canvas_item;
+
+uniform float blur_amount : hint_range(0, 5);
+
+void fragment() {
+	COLOR = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = SubResource( 15 )
+shader_param/blur_amount = 2.0
+
+[sub_resource type="StyleBoxFlat" id=17]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 40.0
+expand_margin_bottom = 40.0
 
 [node name="MAIN" type="Control"]
 pause_mode = 2
@@ -14,6 +41,7 @@ theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
 [node name="background" type="TextureRect" parent="."]
+modulate = Color( 0.705882, 0.705882, 0.705882, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 4 )
@@ -28,50 +56,50 @@ margin_top = -17.664
 margin_bottom = -17.55
 
 [node name="time" type="HSlider" parent="controls"]
-margin_right = 700.0
-margin_bottom = 16.0
+margin_right = 850.0
+margin_bottom = 47.0
 step = 0.01
 
 [node name="time label" type="Label" parent="controls"]
-margin_top = 20.0
-margin_right = 700.0
-margin_bottom = 41.0
+margin_top = 51.0
+margin_right = 850.0
+margin_bottom = 72.0
 text = "0:00/0:00"
 align = 1
 
 [node name="buttons" type="HBoxContainer" parent="controls"]
-margin_top = 45.0
-margin_right = 700.0
-margin_bottom = 72.0
+margin_top = 76.0
+margin_right = 850.0
+margin_bottom = 103.0
 focus_neighbour_top = NodePath("../time")
 
 [node name="backward" type="Button" parent="controls/buttons"]
-margin_right = 230.0
+margin_right = 280.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "backward"
 
 [node name="play" type="Button" parent="controls/buttons"]
-margin_left = 234.0
-margin_right = 465.0
+margin_left = 284.0
+margin_right = 565.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 toggle_mode = true
 text = "play/pause"
 
 [node name="forward" type="Button" parent="controls/buttons"]
-margin_left = 469.0
-margin_right = 700.0
+margin_left = 569.0
+margin_right = 850.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 text = "forward"
 
 [node name="name" type="Label" parent="controls"]
-margin_top = 76.0
-margin_right = 700.0
-margin_bottom = 97.0
-text = "song name"
+margin_top = 107.0
+margin_right = 850.0
+margin_bottom = 128.0
+text = "song"
 align = 1
 
 [node name="songs" type="ScrollContainer" parent="."]
@@ -83,19 +111,50 @@ margin_bottom = -0.0740356
 focus_neighbour_bottom = NodePath("../controls/time")
 
 [node name="song container" type="VBoxContainer" parent="songs"]
-margin_right = 700.0
+margin_right = 850.0
 margin_bottom = 345.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="FileDialog" type="FileDialog" parent="."]
-margin_right = 318.0
-margin_bottom = 158.0
+[node name="popup" type="FileDialog" parent="."]
+margin_left = 224.0
+margin_top = 208.0
+margin_right = 614.0
+margin_bottom = 366.0
 popup_exclusive = true
-window_title = "Select a directory to play music from"
+window_title = "Select a Folder to Play Music from"
 mode_overrides_title = false
 mode = 2
 access = 2
 current_dir = "/home/quandaled/Documents/Godot/music_player"
 current_path = "/home/quandaled/Documents/Godot/music_player/"
-script = ExtResource( 3 )
+
+[node name="panel" type="Panel" parent="popup"]
+show_behind_parent = true
+material = SubResource( 16 )
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 382.0
+margin_bottom = 115.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 17 )
+
+[node name="directory" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 27.0
+
+[node name="text" type="Label" parent="directory"]
+margin_top = 3.0
+margin_right = 423.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Current Folder: "
+
+[node name="change" type="Button" parent="directory"]
+margin_left = 427.0
+margin_right = 850.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+text = "Change"
